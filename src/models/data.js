@@ -10,11 +10,11 @@ const dataSchema = new Schema(
     //   required: true
     // },
 
-    nameCoin: {
+    name: {
       type: String,
       required: true,
     },
-    quantityCoins: {
+    quantity: {
       type: Number,
       required: true,
     },
@@ -22,7 +22,7 @@ const dataSchema = new Schema(
       type: Number,
       required: true,
     },
-    entryPoint: {
+    entry: {
       type: Number,
       required: true,
     },

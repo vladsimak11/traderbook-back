@@ -19,10 +19,10 @@ const addValues = async (req, res, next) => {
 
     res.status(201).json({
       data: {
-        nameCoin: values.nameCoin,
-        quantityCoins: values.quantityCoins,
+        name: values.name,
+        quantity: values.quantity,
         commission: values.commission,
-        entryPoint: values.entryPoint,
+        entry: values.entry,
         sum: values.sum,
       },
     });
@@ -30,7 +30,6 @@ const addValues = async (req, res, next) => {
     next(error);
   }
 };
-
 
 const removeValue = async (req, res, next) => {
   try {
