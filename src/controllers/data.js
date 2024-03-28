@@ -35,25 +35,8 @@ const removeValue = async (req, res, next) => {
     }
 
     res.json({
-      message: "Contact deleted"
+      id: valueId,
     });
-
-  } catch (error) {
-    next(error);
-  }
-}
-
-const getDataById = async (req, res, next) => {
-  try {
-
-    const { valueId } = req.params;
-    const result = await Data.findById(valueId);
-
-    if(!result) {
-      throw HttpError(404, "Not found");
-    }
-    
-    res.json(result);
 
   } catch (error) {
     next(error);
@@ -64,5 +47,4 @@ module.exports = {
   listData,
   addValues,
   removeValue,
-  getDataById,
 };
