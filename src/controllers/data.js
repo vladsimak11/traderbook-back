@@ -18,7 +18,11 @@ const addValues = async (req, res, next) => {
     const values = await Data.create({ ...req.body });
     
     res.status(201).json({
-      values
+      name: values.name,
+      quantity: values.quantity,
+      commission: values.commission,
+      entry: values.entry,
+      sum: values.sum,
     });
   } catch (error) {
     next(error);
