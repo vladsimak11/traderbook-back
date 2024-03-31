@@ -18,6 +18,7 @@ const addValues = async (req, res, next) => {
     const values = await Data.create({ ...req.body });
     
     res.status(201).json({
+      id: values._id,
       name: values.name,
       quantity: values.quantity,
       commission: values.commission,
