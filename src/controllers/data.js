@@ -4,7 +4,7 @@ const { HttpError } = require("../helpers");
 
 const listData = async (req, res, next) => {
   try {
-    const result = await Data.find(req);
+    const result = await Data.find(req).sort({'updatedAt': -1});
     res.json(result);
   } catch (error) {
     next(error);
