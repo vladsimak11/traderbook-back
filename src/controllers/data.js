@@ -4,10 +4,8 @@ const { HttpError } = require("../helpers");
 
 const listData = async (req, res, next) => {
   try {
-    const values = await Data.find(req);
-    res.json({
-      values,
-    });
+    const result = await Data.find(req);
+    res.json(result);
   } catch (error) {
     next(error);
   }
@@ -15,16 +13,9 @@ const listData = async (req, res, next) => {
 
 const addValues = async (req, res, next) => {
   try {
-    const values = await Data.create({ ...req.body });
+    const result = await Data.create({ ...req.body });
     
-    res.status(201).json({
-      id: values._id,
-      name: values.name,
-      quantity: values.quantity,
-      commission: values.commission,
-      entry: values.entry,
-      sum: values.sum,
-    });
+    res.status(201).json(result);
   } catch (error) {
     next(error);
   }
@@ -40,7 +31,7 @@ const removeValue = async (req, res, next) => {
     }
 
     res.json({
-      id: valueId,
+      message: "Coin deleted"
     });
 
   } catch (error) {
