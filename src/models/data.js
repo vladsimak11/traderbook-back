@@ -15,19 +15,19 @@ const dataSchema = new Schema(
       required: true,
     },
     quantity: {
-      type: Number,
+      type: String,
       required: true,
     },
     commission: {
-      type: Number,
+      type: String,
       required: true,
     },
     entry: {
-      type: Number,
+      type: String,
       required: true,
     },
     sum: {
-      type: Number,
+      type: String,
       required: true,
     },
   },

@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
+const { isValidId, validateBody } = require("../../middlewares");
+const schemas = require("../../validator/data");
+
 const {
   listData,
   addValues,
@@ -9,8 +12,8 @@ const {
 
 router.get("/", listData);
 
-router.post("/", addValues);
+router.post("/", validateBody(schemas.addSchema), addValues);
 
-router.delete('/:valueId', removeValue);
+router.delete('/:valueId', isValidId, removeValue);
 
 module.exports = router;
