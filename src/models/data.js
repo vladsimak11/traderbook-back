@@ -4,11 +4,11 @@ const {handleMongooseError} = require("../helpers");
 
 const dataSchema = new Schema(
   {
-    // trader: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Trader',
-    //   required: true
-    // },
+    owner: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
+      required: true
+    },
 
     name: {
       type: String,

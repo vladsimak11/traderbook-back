@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { isValidId, validateBody } = require("../../middlewares");
+const { isValidId, validateBody, authenticate} = require("../../middlewares");
 const schemas = require("../../validator/data");
 
 const {
@@ -10,10 +10,10 @@ const {
   removeValue,
 } = require("../../controllers/data");
 
-router.get("/", listData);
+router.get("/", authenticate, listData);
 
-router.post("/", validateBody(schemas.addSchema), addValues);
+router.post("/", authenticate, validateBody(schemas.addSchema), addValues);
 
-router.delete('/:valueId', isValidId, removeValue);
+router.delete('/:valueId', authenticate, isValidId, removeValue);
 
 module.exports = router;
