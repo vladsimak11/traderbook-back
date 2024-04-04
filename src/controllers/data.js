@@ -4,7 +4,10 @@ const { HttpError } = require("../helpers");
 
 const listData = async (req, res, next) => {
   try {
-    const result = await Data.find(req).sort({'updatedAt': -1});
+    const { _id: owner } = req.user;
+    const { page = 1, limit = 20 } = req.query;
+    const skip = (page - 1) * limit;
+    const result = await Data.find({owner}, "-createdAt -updatedAt", {skip, limit});
     res.json(result);
   } catch (error) {
     next(error);
@@ -13,8 +16,9 @@ const listData = async (req, res, next) => {
 
 const addValues = async (req, res, next) => {
   try {
-    const result = await Data.create({ ...req.body });
-    
+    const { _id: owner} = req.user;
+    const result = await Data.create({...req.body, owner});
+
     res.status(201).json(result);
   } catch (error) {
     next(error);
@@ -31,13 +35,12 @@ const removeValue = async (req, res, next) => {
     }
 
     res.json({
-      message: "Coin deleted"
+      message: "Coin deleted",
     });
-
   } catch (error) {
     next(error);
   }
-}
+};
 
 module.exports = {
   listData,
