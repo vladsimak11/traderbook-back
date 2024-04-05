@@ -8,7 +8,7 @@ const { SECRET_KEY } = process.env;
 
 const register = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     const user = await User.findOne({ email });
 
@@ -29,8 +29,7 @@ const register = async (req, res, next) => {
     res.status(201).json({
       user: {
         email: newUser.email,
-        password: newUser.password,
-        verificationToken: newUser.verificationToken,
+        name: newUser.name,
       },
     });
   } catch (error) {
@@ -74,10 +73,11 @@ const login = async (req, res, next) => {
 
 const getCurrent = async(req, res, next) => {
     try {
-      const {email} = req.user
+      const {email, name} = req.user
   
       res.json({
         email,
+        name
       });
     } catch (error) {
       next(error);
