@@ -8,6 +8,7 @@ const {
   listData,
   addValues,
   removeValue,
+
 } = require("../../controllers/data");
 
 router.get("/", authenticate, listData);
@@ -15,5 +16,6 @@ router.get("/", authenticate, listData);
 router.post("/", authenticate, validateBody(schemas.addSchema), addValues);
 
 router.delete('/:valueId', authenticate, isValidId, removeValue);
+
 
 module.exports = router;
