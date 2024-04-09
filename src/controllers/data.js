@@ -35,7 +35,7 @@ const removeValue = async (req, res, next) => {
     }
 
     res.json({
-      message: "Coin deleted",
+      id: valueId,
     });
   } catch (error) {
     next(error);
