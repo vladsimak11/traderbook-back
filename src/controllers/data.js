@@ -7,7 +7,7 @@ const listData = async (req, res, next) => {
     const { _id: owner } = req.user;
     const { page = 1, limit = 20 } = req.query;
     const skip = (page - 1) * limit;
-    const result = await Data.find({owner}, "-createdAt -updatedAt", {skip, limit});
+    const result = await Data.find({owner}, "-createdAt -updatedAt", {skip, limit}).sort({'createdAt': -1});
     res.json(result);
   } catch (error) {
     next(error);
