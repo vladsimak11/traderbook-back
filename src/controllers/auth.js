@@ -26,6 +26,7 @@ const register = async (req, res, next) => {
       ...req.body,
       password: hashPassword,
       verificationToken,
+      token: null,
     });
 
     const verifyEmail = {
@@ -35,6 +36,15 @@ const register = async (req, res, next) => {
     };
 
     await sendEmail(verifyEmail);
+
+    const payload = {
+      id: newUser._id,
+    };
+
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+
+    newUser.token = token;
+    await newUser.save();
 
     res.status(201).json({
       user: {
