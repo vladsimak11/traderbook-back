@@ -16,6 +16,9 @@ const addSchema = Joi.object({
   sum: Joi.string().required().messages({
     'any.required': 'missing required sum field'
   }),
+  type: Joi.string().required().messages({
+    'any.required': 'missing required type field'
+  }),
 });
 
 

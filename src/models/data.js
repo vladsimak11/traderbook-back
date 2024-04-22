@@ -30,6 +30,10 @@ const dataSchema = new Schema(
       type: String,
       required: true,
     },
+    type: {
+      type: String,
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );
