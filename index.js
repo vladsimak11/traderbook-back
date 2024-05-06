@@ -2,12 +2,15 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 dotenv.config();
 
-const dataTraderBook = require("./routes/api/data");
-const authRouter = require("./routes/api/auth");
+const dataTraderBook = require("./src/routes/api/data");
+const authRouter = require("./src/routes/api/auth");
 
 const app = express();
+
+const { DB_HOST, PORT = 3003 } = process.env;
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
@@ -19,6 +22,10 @@ app.use(express.static("public"));
 app.use("/data", dataTraderBook);
 app.use("/users", authRouter);
 
+app.get("/", (req, res) => {
+  res.send("Ready to use!!!");
+});
+
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
 });
@@ -28,4 +35,16 @@ app.use((err, req, res, next) => {
   res.status(status).json({ message });
 });
 
-module.exports = app;
+mongoose.set("strictQuery", true);
+
+mongoose
+  .connect(DB_HOST)
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Database connection successful! Port: ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log(error.message);
+    process.exit(1);
+  });
