@@ -4,8 +4,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const dataTraderBook = require('./routes/api/data');
-const authRouter = require('./routes/api/auth');
+const dataTraderBook = require("./routes/api/data");
+const authRouter = require("./routes/api/auth");
 
 const app = express();
 
@@ -16,16 +16,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 
-app.use('/data', dataTraderBook);
-app.use('/users', authRouter);
+app.use("/data", dataTraderBook);
+app.use("/users", authRouter);
 
 app.use((req, res) => {
-  res.status(404).json({ message: 'Not found' })
+  res.status(404).json({ message: "Not found" });
 });
 
 app.use((err, req, res, next) => {
-  const {status = 500, message = "Server error"} = err;
-  res.status(status).json({ message, })
+  const { status = 500, message = "Server error" } = err;
+  res.status(status).json({ message });
 });
 
 module.exports = app;
