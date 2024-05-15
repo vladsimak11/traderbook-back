@@ -1,6 +1,9 @@
 const Joi = require("joi");
 
 const addSchema = Joi.object({
+  exchange: Joi.string().required().messages({
+    'any.required': 'missing required name field'
+  }),
   name: Joi.string().required().messages({
     'any.required': 'missing required name field'
   }),
