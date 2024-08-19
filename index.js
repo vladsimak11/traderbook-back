@@ -7,6 +7,7 @@ dotenv.config();
 
 const dataTraderBook = require("./src/routes/api/data");
 const authRouter = require("./src/routes/api/auth");
+const getTokensList = require("./src/routes/api/tokens");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(express.static("public"));
 
 app.use("/data", dataTraderBook);
 app.use("/users", authRouter);
+app.use("/api/btc", getTokensList);
 
 app.get("/", (req, res) => {
   res.send("Ready to use!!!");
